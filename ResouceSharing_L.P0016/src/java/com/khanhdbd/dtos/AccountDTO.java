@@ -17,27 +17,46 @@ public class AccountDTO implements Serializable {
     private String email;
     private String password;
     private String name;
-    private int roleId;
+    private String roleName;
     private String verifyCode;
-    private String accountStatusId;
+    private int statusId;
+    private int roleId;
+    private String status;
     private Date insDate;
 
-    public AccountDTO(String email, String password, String name, int roleId, String verifyCode, String accountStatusId, Date insDate, boolean isDeleted) {
+    public int getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public AccountDTO(String email, String password, String name, String roleName, String verifyCode, int statusId, int roleId, String status, Date insDate) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.roleId = roleId;
+        this.roleName = roleName;
         this.verifyCode = verifyCode;
-        this.accountStatusId = accountStatusId;
+        this.statusId = statusId;
+        this.roleId = roleId;
+        this.status = status;
         this.insDate = insDate;
-        this.isDeleted = isDeleted;
-    }
-
-    public AccountDTO() {
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public AccountDTO() {
     }
 
     public void setEmail(String email) {
@@ -60,12 +79,12 @@ public class AccountDTO implements Serializable {
         this.name = name;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getVerifyCode() {
@@ -76,12 +95,12 @@ public class AccountDTO implements Serializable {
         this.verifyCode = verifyCode;
     }
 
-    public String getAccountStatusId() {
-        return accountStatusId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAccountStatusId(String accountStatusId) {
-        this.accountStatusId = accountStatusId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getInsDate() {
@@ -91,13 +110,4 @@ public class AccountDTO implements Serializable {
     public void setInsDate(Date insDate) {
         this.insDate = insDate;
     }
-
-    public boolean isIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-    private boolean isDeleted;
 }
