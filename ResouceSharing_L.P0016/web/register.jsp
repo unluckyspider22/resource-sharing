@@ -29,7 +29,7 @@
                                 </div> <!-- form-group// -->
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input name="txtPassword" id="txtPassword" class="form-control" placeholder="******" type="password" required="true">
+                                    <input name="txtPassword" id="txtPassword" class="form-control" placeholder="******" type="password" required="true" min="8" max="36">
                                 </div> <!-- form-group// --> 
 
                                 <div class="form-group">

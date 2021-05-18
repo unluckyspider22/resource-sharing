@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 
 public class CheckVerifyCodeController extends HttpServlet {
 
-    private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(CheckVerifyCodeController.class.getName());
 
     private final String SUCCESS = "login.jsp";
     private final String ERROR = "verify_account.jsp";

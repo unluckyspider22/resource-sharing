@@ -6,6 +6,7 @@
 package com.khanhbdb.utils;
 
 import com.khanhbdb.controllers.MainController;
+import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.security.SecureRandom;
 import java.sql.Date;
@@ -20,6 +21,7 @@ import javax.mail.Message;
 
 public class CommonUltil implements Serializable {
 
+    private final static Logger LOGGER = Logger.getLogger(CommonUltil.class.getName());
 
     public static String generateVerifyCode(int len) {
 
