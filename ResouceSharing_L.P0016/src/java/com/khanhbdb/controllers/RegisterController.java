@@ -17,11 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
 
 public class RegisterController extends HttpServlet {
 
-    private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
 
     private final String SUCCESS = "SendVerificationCodeController";
     private final String ERROR = "register.jsp";
@@ -58,7 +56,7 @@ public class RegisterController extends HttpServlet {
             if (valid) {
                 String verifyCode = CommonUltil.generateVerifyCode(8);
                 Date insDate = CommonUltil.getCurrentDateSql();
-                AccountDTO dto = new AccountDTO(email, name, password, roleName, statusName, verifyCode, insDate);
+                AccountDTO dto = new AccountDTO(email, password, name, roleName, statusName, verifyCode, insDate);
                 boolean result = dao.registerAccount(dto);
                 if (result) {
                     HttpSession session = request.getSession();

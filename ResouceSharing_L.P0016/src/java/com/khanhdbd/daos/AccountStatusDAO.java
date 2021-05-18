@@ -24,12 +24,12 @@ public class AccountStatusDAO implements Serializable {
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
-                String sql = "SELECT Id FROM Status WHERE Name = ?";
+                String sql = "SELECT AccountStatusId FROM AccountStatus WHERE Name = ?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, statusName);
                 rs = ps.executeQuery();
                 if (rs.next()) {
-                    result = rs.getInt("Id");
+                    result = rs.getInt("AccountStatusId");
                 }
             }
         } finally {

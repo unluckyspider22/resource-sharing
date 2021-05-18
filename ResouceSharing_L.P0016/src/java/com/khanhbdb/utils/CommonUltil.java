@@ -17,11 +17,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.Message;
-import org.apache.log4j.Logger;
 
 public class CommonUltil implements Serializable {
 
-    private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
 
     public static String generateVerifyCode(int len) {
 
@@ -50,7 +48,7 @@ public class CommonUltil implements Serializable {
         props.put("mail.smtp.host", MailConfig.HOST_NAME);
         props.put("mail.smtp.socketFactory.port", MailConfig.SSL_PORT);
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.port", MailConfig.SSL_PORT);
+        props.put("mail.smtp.port", MailConfig.TSL_PORT);
 
         // get Session
         Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
@@ -63,6 +61,7 @@ public class CommonUltil implements Serializable {
         // compose message
         try {
             MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(MailConfig.APP_EMAIL));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject("Verification Email");
             message.setText("Your verification code is: " + code);
