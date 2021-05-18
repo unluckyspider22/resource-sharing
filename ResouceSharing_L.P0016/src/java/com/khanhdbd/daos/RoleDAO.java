@@ -43,4 +43,23 @@ public class RoleDAO implements Serializable {
         }
         return result;
     }
+
+    public int getRoleIDByName(String roleName) throws SQLException, NamingException {
+        int result = -1;
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "SELECT RoleId FROM Roles WHERE Name = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, roleName);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    result = rs.getInt("RoleId");
+                }
+            }
+        } finally {
+            DBUtil.closeConnection(conn, ps, rs);
+        }
+        return result;
+    }
 }

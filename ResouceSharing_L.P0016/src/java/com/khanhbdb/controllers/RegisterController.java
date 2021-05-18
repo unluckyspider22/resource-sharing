@@ -5,19 +5,25 @@
  */
 package com.khanhbdb.controllers;
 
+import com.khanhbdb.utils.CommonUltil;
+import com.khanhdbd.daos.AccountDAO;
+import com.khanhdbd.dtos.AccountDTO;
+import com.khanhdbd.dtos.AccountErrorObj;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 public class RegisterController extends HttpServlet {
 
     private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
 
-    private final String SUCCESS = "CreateVerificationCodeController";
+    private final String SUCCESS = "SendVerificationCodeController";
     private final String ERROR = "register.jsp";
 
     /**
@@ -32,11 +38,45 @@ public class RegisterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        String url = ERROR;
         try {
-
+            String name = request.getParameter("txtName").trim();
+            String email = request.getParameter("txtEmail").trim();
+            String password = request.getParameter("txtPassword");
+            String roleName = "Employee";
+            String statusName = "New";
+            AccountDAO dao = new AccountDAO();
+            AccountErrorObj error = null;
+            boolean valid = true;
+            if (dao.checkExistEmail(email)) {
+                if (error == null) {
+                    error = new AccountErrorObj();
+                }
+                error.setEmailError("Email has been registered!");
+                valid = false;
+            }
+            if (valid) {
+                String verifyCode = CommonUltil.generateVerifyCode(8);
+                Date insDate = CommonUltil.getCurrentDateSql();
+                AccountDTO dto = new AccountDTO(email, name, password, roleName, statusName, verifyCode, insDate);
+                boolean result = dao.registerAccount(dto);
+                if (result) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("REGISTER_USER", dto);
+                    url = SUCCESS;
+                }
+            } else {
+                url = ERROR;
+                request.setAttribute("REGISTER_ERROR", error);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error at RegisterController: " + e.toString());
         } finally {
-            out.close();
+            if (url.equals(SUCCESS)) {
+                response.sendRedirect(url);
+            } else if (url.equals(ERROR)) {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
         }
     }
 

@@ -27,7 +27,6 @@
                                     <input name="txtEmail" class="form-control" placeholder="Email" type="email" required="true">
                                     <font color="red">${requestScope.REGISTERERROR.emailError}</font>
                                 </div> <!-- form-group// -->
-
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input name="txtPassword" id="txtPassword" class="form-control" placeholder="******" type="password" required="true">
@@ -37,11 +36,9 @@
                                     <label>Confirm password</label>
                                     <input name="txtConfirmPassword" id="txtConfirmPassword" class="form-control" placeholder="******" type="password" required="true">
                                 </div> <!-- form-group// --> 
-
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block" name="action" value="Register" onclick="return ValidatePassword()"> Register </button>
-                                </div> <!-- form-group// -->     
-                                <a href="IndexController" class="float-left btn btn-outline-info" style="margin-right: 0.2rem">Back to Home</a>
+                                </div> <!-- form-group// -->                               
                             </form>
                         </article>
                     </div> <!-- card.// -->
@@ -51,7 +48,6 @@
                 </aside>
             </div>
         </div>
-
         <script type="text/javascript">
             function ValidatePassword() {
                 var password = document.getElementById("txtPassword").value;

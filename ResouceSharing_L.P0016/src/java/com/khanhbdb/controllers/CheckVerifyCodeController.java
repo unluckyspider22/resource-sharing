@@ -5,22 +5,23 @@
  */
 package com.khanhbdb.controllers;
 
+import com.khanhdbd.daos.AccountDAO;
+import com.khanhdbd.dtos.AccountDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
-public class MainController extends HttpServlet {
+public class CheckVerifyCodeController extends HttpServlet {
 
     private final static Logger LOGGER = Logger.getLogger(MainController.class.getName());
-    private final String USER_LOGIN = "login.jsp";
-    private final String LOGIN = "LoginController";
-    private final String LOGOUT = "LogoutController";
-    private final String REGISTER = "RegisterController";
-    private final String CHECK_VERIFY_CODE = "CheckVerifyCodeController";
-    private final String ERROR = "error.jsp";
+
+    private final String SUCCESS = "login.jsp";
+    private final String ERROR = "verify_account.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,20 +37,19 @@ public class MainController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if (action.equals("User_Login")) {
-                url = USER_LOGIN;
-            } else if (action.equals("Login")) {
-                url = LOGIN;
-            } else if (action.equals("Logout")) {
-                url = LOGOUT;
-            } else if (action.equals("Register")) {
-                url = REGISTER;
-            } else if (action.equals("CheckVerifyCode")) {
-                url = CHECK_VERIFY_CODE;
+            String userVerificationCode = request.getParameter("txtVerifyCode");
+            HttpSession session = request.getSession();
+            AccountDTO accountDto = (AccountDTO) session.getAttribute("REGISTER_USER");
+            AccountDAO dao = new AccountDAO();
+            String verifyCodeDB = dao.getAccountVerifyCode(accountDto.getEmail());
+            if (userVerificationCode.equals(verifyCodeDB)) {
+                dao.activeAccount(accountDto.getEmail(), "Active");
+                url = SUCCESS;
+            } else {
+                request.setAttribute("VERIFICATION_ERROR", "Incorrect verification code!");
             }
         } catch (Exception e) {
-            LOGGER.error("Error at MainController: " + e.toString());
+            LOGGER.error("Error at RegisterController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

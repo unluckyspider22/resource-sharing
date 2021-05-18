@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="login-box" class="col-md-12">
-            <form id="login-form" action="login" method="post">
+            <form id="login-form" action="MainController" method="post">
                 <h3 class="text-center text-info">Sign In</h3>
                 <div class="form-group">
                     <label for="email" class="text-info">Username:</label><br>
@@ -30,7 +30,7 @@
                     </c:url>
                     <a href="${loginLink}"><font color="green">Or Login With Google</font></a> 
                 </div>
-                <a href="Index"><font color="black">Back to Home</font></a> 
+                <a href="register.jsp"><font color="green">Register</font></a> 
             </form>
         </div>
     </body>

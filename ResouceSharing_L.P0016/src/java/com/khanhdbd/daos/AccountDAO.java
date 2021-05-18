@@ -10,6 +10,7 @@ import com.khanhdbd.dtos.AccountDTO;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,15 +65,50 @@ public class AccountDAO implements Serializable {
         return result;
     }
 
-    public boolean registerUser(AccountDTO newUser) throws NamingException, SQLException {
+    public boolean checkExistEmail(String email) throws SQLException, NamingException {
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "SELECT Email FROM Accounts WHERE Email = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, email);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        } finally {
+            DBUtil.closeConnection(conn, ps, rs);
+        }
+        return false;
+    }
+
+    public String getAccountVerifyCode(String email) throws SQLException, NamingException {
+        String result = "";
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "SELECT VerifyCode FROM Accounts WHERE Email = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, email);
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    result = rs.getString("VerifyCode");
+                }
+            }
+        } finally {
+            DBUtil.closeConnection(conn, ps, rs);
+        }
+        return result;
+    }
+
+    public boolean registerAccount(AccountDTO newUser) throws NamingException, SQLException {
         boolean result = false;
         try {
-//            RoleDAO roleDAO = new RoleDAO();
-//            int roleID = roleDAO.getRoleIDByDescription(newUser.getRole());
-//            
-//            AccountStatusDAO accountStatusDAO = new AccountStatusDAO();
-//            int statusID = accountStatusDAO.getIDByDescription(newUser.getStatus());
-
+            RoleDAO roleDAO = new RoleDAO();
+            int roleId = roleDAO.getRoleIDByName(newUser.getRoleName());
+            AccountStatusDAO accountStatusDAO = new AccountStatusDAO();
+            int statusId = accountStatusDAO.getStatusIdByName(newUser.getStatus());
             conn = DBUtil.getConnection();
             if (conn != null) {
                 String sql = "INSERT INTO Accounts(Email, Password, Name, "
@@ -81,8 +117,30 @@ public class AccountDAO implements Serializable {
                 ps.setString(1, newUser.getEmail());
                 ps.setString(2, newUser.getPassword());
                 ps.setString(3, newUser.getName());
-                ps.setInt(4, newUser.getRoleId());
-                ps.setInt(5, newUser.getStatusId());
+                ps.setInt(4, roleId);
+                ps.setInt(5, statusId);
+                ps.setString(6, newUser.getVerifyCode());
+                ps.setDate(7, newUser.getInsDate());
+                result = (ps.executeUpdate() > 0);
+            }
+        } finally {
+            DBUtil.closeConnection(conn, ps, rs);
+        }
+        return result;
+    }
+
+    public boolean activeAccount(String email, String activeStatusName) throws SQLException, NamingException {
+        boolean result = false;
+        AccountStatusDAO accountStatusDao = new AccountStatusDAO();
+        int activeStatusId = accountStatusDao.getStatusIdByName(activeStatusName);
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE Accounts SET StatusID = ? "
+                        + "WHERE Email = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, activeStatusId);
+                ps.setString(2, email);
                 result = (ps.executeUpdate() > 0);
             }
         } finally {

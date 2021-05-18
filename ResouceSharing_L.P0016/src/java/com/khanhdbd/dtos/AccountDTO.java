@@ -6,7 +6,7 @@
 package com.khanhdbd.dtos;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -23,6 +23,16 @@ public class AccountDTO implements Serializable {
     private int roleId;
     private String status;
     private Date insDate;
+
+    public AccountDTO(String email, String password, String name, String roleName, String status, String verifyCode, Date insDate) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.roleName = roleName;
+        this.status = status;
+        this.verifyCode = verifyCode;
+        this.insDate = insDate;
+    }
 
     public int getStatusId() {
         return statusId;
