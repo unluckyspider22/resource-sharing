@@ -6,19 +6,21 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
     <body>
         <div id="login-box" class="col-md-12">
-            <form id="login-form" action="MainController" method="post">
+            <form id="login-form" action="MainController" method="POST">
                 <h3 class="text-center text-info">Sign In</h3>
                 <div class="form-group">
                     <label for="email" class="text-info">Username:</label><br>
-                    <input type="email" name="email" id="email" class="form-control" required="true">
+                    <input type="email" name="txtEmail" id="email" class="form-control" required="true">
                 </div>
                 <div class="form-group">
                     <label for="password" class="text-info">Password:</label><br>
-                    <input type="password" name="password" id="password" class="form-control" required="true">
+                    <input type="password" name="txtPassword" id="password" class="form-control" required="true">
                 </div>
+                <div class="g-recaptcha" data-sitekey="6LcVI9waAAAAAH7rL61_IZhpKZCBYMErcaGa8csv"></div>
                 <div class="form-group">
                     <button type="submit" name="action" class="btn btn-info btn-md" value="Login">Login</button>
                     <c:url var="loginLink" value="https://accounts.google.com/o/oauth2/auth">   
@@ -32,6 +34,12 @@
                 </div>
                 <a href="register.jsp"><font color="green">Register</font></a> 
             </form>
+            <%
+                String error = (String) request.getAttribute("ERROR");
+                if(error != null){
+            %>
+            <font color="red"><%=error%></font>
+            <%}%>
         </div>
     </body>
 </html>

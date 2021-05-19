@@ -42,7 +42,7 @@ public class CheckVerifyCodeController extends HttpServlet {
             AccountDTO accountDto = (AccountDTO) session.getAttribute("REGISTER_USER");
             AccountDAO dao = new AccountDAO();
             String verifyCodeDB = dao.getAccountVerifyCode(accountDto.getEmail());
-            if (userVerificationCode.equals(verifyCodeDB)) {
+            if (userVerificationCode.equals(verifyCodeDB.trim())) {
                 dao.activeAccount(accountDto.getEmail(), "Active");
                 url = SUCCESS;
             } else {

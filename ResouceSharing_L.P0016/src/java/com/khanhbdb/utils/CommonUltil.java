@@ -6,6 +6,7 @@
 package com.khanhbdb.utils;
 
 import com.khanhbdb.controllers.MainController;
+import com.khanhbdb.constants.MailConfig;
 import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.security.SecureRandom;

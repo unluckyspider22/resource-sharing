@@ -62,6 +62,7 @@ public class RegisterController extends HttpServlet {
                 if (result) {
                     HttpSession session = request.getSession();
                     session.setAttribute("REGISTER_USER", dto);
+                    AccountDTO accountDto = (AccountDTO) session.getAttribute("REGISTER_USER");
                     url = SUCCESS;
                 }
             } else {
@@ -71,11 +72,7 @@ public class RegisterController extends HttpServlet {
         } catch (Exception e) {
             LOGGER.error("Error at RegisterController: " + e.toString());
         } finally {
-            if (url.equals(SUCCESS)) {
-                response.sendRedirect(url);
-            } else if (url.equals(ERROR)) {
-                request.getRequestDispatcher(url).forward(request, response);
-            }
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

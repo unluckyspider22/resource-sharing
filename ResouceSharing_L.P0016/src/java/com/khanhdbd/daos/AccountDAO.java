@@ -49,7 +49,7 @@ public class AccountDAO implements Serializable {
                 if (rs.next()) {
                     String userName = rs.getString("Name");
                     String role = rs.getString("RoleName");
-                    String status = rs.getString("Status    Name");
+                    String status = rs.getString("StatusName");
                     String roleName = rs.getString("RoleName");
                     result = new AccountDTO();
                     result.setEmail(email);
@@ -135,12 +135,11 @@ public class AccountDAO implements Serializable {
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Accounts SET StatusID = ? "
-                        + "WHERE Email = ?";
+                String sql = "UPDATE Accounts SET AccountStatusId = ? WHERE Email = ?";
                 ps = conn.prepareStatement(sql);
-                ps.setInt(1, activeStatusId);
                 ps.setString(2, email);
-                result = (ps.executeUpdate() > 0);
+                ps.setInt(1, activeStatusId);
+                result = ps.executeUpdate() > 0;
             }
         } finally {
             DBUtil.closeConnection(conn, ps, rs);
