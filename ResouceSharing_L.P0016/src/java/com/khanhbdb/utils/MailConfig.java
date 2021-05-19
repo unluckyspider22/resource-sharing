@@ -13,8 +13,8 @@ public class MailConfig {
 
     public static final int TSL_PORT = 587; // Port for TLS/STARTTLS
 
-    public static final String APP_EMAIL = "tanntse63184@fpt.edu.vn"; // your email
+    public static final String APP_EMAIL = "baokhanh.buido@gmail.com"; // your email
 
-    public static final String APP_PASSWORD = "thanhtan1998"; // your password
+    public static final String APP_PASSWORD = "buidobaokhanh0711"; // your password
 
 }
