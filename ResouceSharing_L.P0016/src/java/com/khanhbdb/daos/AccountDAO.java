@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.khanhdbd.daos;
+package com.khanhbdb.daos;
 
 import com.khanhbdb.utils.DBUtil;
-import com.khanhdbd.dtos.AccountDTO;
+import com.khanhbdb.dtos.AccountDTO;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -135,7 +135,7 @@ public class AccountDAO implements Serializable {
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
-                String sql = "UPDATE Accounts SET StatusID = ? "
+                String sql = "UPDATE Accounts SET AccountStatusId = ? "
                         + "WHERE Email = ?";
                 ps = conn.prepareStatement(sql);
                 ps.setInt(1, activeStatusId);

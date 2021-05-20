@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.khanhdbd.daos;
+package com.khanhbdb.daos;
 
 import com.khanhbdb.utils.DBUtil;
 import java.io.Serializable;

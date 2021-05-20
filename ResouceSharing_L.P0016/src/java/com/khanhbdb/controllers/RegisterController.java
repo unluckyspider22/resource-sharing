@@ -6,9 +6,9 @@
 package com.khanhbdb.controllers;
 
 import com.khanhbdb.utils.CommonUltil;
-import com.khanhdbd.daos.AccountDAO;
-import com.khanhdbd.dtos.AccountDTO;
-import com.khanhdbd.dtos.AccountErrorObj;
+import com.khanhbdb.daos.AccountDAO;
+import com.khanhbdb.dtos.AccountDTO;
+import com.khanhbdb.dtos.AccountErrorObj;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -70,6 +70,9 @@ public class RegisterController extends HttpServlet {
             }
         } catch (Exception e) {
             LOGGER.error("Error at RegisterController: " + e.toString());
+            Logger.getLogger(e.getMessage());
+            e.printStackTrace();
+
         } finally {
             if (url.equals(SUCCESS)) {
                 response.sendRedirect(url);

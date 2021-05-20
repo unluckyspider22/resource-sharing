@@ -5,8 +5,8 @@
  */
 package com.khanhbdb.controllers;
 
-import com.khanhdbd.daos.AccountDAO;
-import com.khanhdbd.dtos.AccountDTO;
+import com.khanhbdb.daos.AccountDAO;
+import com.khanhbdb.dtos.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

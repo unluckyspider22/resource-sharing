@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/LabWeb/Bai1/ResouceSharing_L.P0016/src/java/com/khanhbdb/dtos/AccountDTO.java</file>
+            <file>file:/D:/LabWeb/Bai1/ResouceSharing_L.P0016/src/java/com/khanhbdb/controllers/SendVerificationCodeController.java</file>
+            <file>file:/D:/LabWeb/Bai1/ResouceSharing_L.P0016/src/java/com/khanhbdb/controllers/MainController.java</file>
+            <file>file:/D:/LabWeb/Bai1/ResouceSharing_L.P0016/web/WEB-INF/web.xml</file>
+            <file>file:/D:/LabWeb/Bai1/ResouceSharing_L.P0016/web/register.jsp</file>
+            <file>file:/D:/LabWeb/Bai1/ResouceSharing_L.P0016/src/java/com/khanhbdb/controllers/RegisterController.java</file>
+            <file>file:/D:/LabWeb/Bai1/ResouceSharing_L.P0016/src/java/com/khanhbdb/daos/AccountDAO.java</file>
+            <file>file:/D:/LabWeb/Bai1/ResouceSharing_L.P0016/src/java/com/khanhbdb/controllers/CheckVerifyCodeController.java</file>
+        </group>
     </open-files>
 </project-private>

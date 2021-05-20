@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.khanhdbd.daos;
+package com.khanhbdb.daos;
 
 import com.khanhbdb.utils.DBUtil;
-import com.khanhdbd.dtos.RoleDTO;
+import com.khanhbdb.dtos.RoleDTO;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

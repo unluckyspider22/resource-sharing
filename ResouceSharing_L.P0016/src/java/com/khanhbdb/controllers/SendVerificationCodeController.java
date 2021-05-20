@@ -6,7 +6,7 @@
 package com.khanhbdb.controllers;
 
 import com.khanhbdb.utils.CommonUltil;
-import com.khanhdbd.dtos.AccountDTO;
+import com.khanhbdb.dtos.AccountDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
